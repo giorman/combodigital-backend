@@ -13,7 +13,6 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("api/combodigital/")
 public class ClienteController {
     @Autowired
@@ -57,8 +56,8 @@ public class ClienteController {
 
     @DeleteMapping("eliminar/cliente/{id}")
     private ResponseEntity<Void> eliminar(@PathVariable Long id){
-        Cliente clienteEncontrado= iClienteService.buscarCliente(id).orElseThrow();
-        if (clienteEncontrado != null){
+        Optional<Cliente> clienteEncontrado= iClienteService.buscarCliente(id);
+        if (clienteEncontrado.isPresent()){
             iClienteService.eliminarCliente(id);
             return new ResponseEntity<>(HttpStatus.OK) ;
         }
