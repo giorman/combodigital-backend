@@ -48,7 +48,6 @@ public class ClienteController {
     private ResponseEntity<Cliente> editar(@RequestBody Cliente cliente){
         Optional<Cliente> clienteEncontrado= iClienteService.buscarCliente(cliente.getId());
         if (clienteEncontrado.isPresent()){
-            cliente.setSuscripciones(clienteEncontrado.get().getSuscripciones());
            return new ResponseEntity<Cliente>(iClienteService.editarCliente(cliente),HttpStatus.OK) ;
         }
         return  new ResponseEntity<>(null,HttpStatus.NOT_FOUND);

@@ -44,6 +44,8 @@ public class ClienteService implements IClienteService {
     @Override
     @Transactional
     public Cliente editarCliente(Cliente cliente) {
+        Optional<Cliente> clienteEncontrado= buscarCliente(cliente.getId());
+        cliente.setSuscripciones(clienteEncontrado.get().getSuscripciones());
         return clienteRepository.save(cliente);
     }
 
