@@ -10,7 +10,7 @@ public interface ISuscripcionService {
     Collection<Suscripcion> listaSuscripcion();
     Collection<Suscripcion> listaSuscripcionRenovaciones();
     Collection<Suscripcion> listaSuscripcionVencidas();
-    Optional<Suscripcion> consultarSuscripcion(Long id);
+    Suscripcion consultarSuscripcion(Long id);
     Suscripcion agregarSuscripcion(Suscripcion suscripicion);
     Suscripcion editarSuscripcion(Suscripcion suscripcion);
     void eliminarSuscripcion(Long id);

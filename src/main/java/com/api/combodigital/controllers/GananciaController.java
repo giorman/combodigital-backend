@@ -21,11 +21,6 @@ public class GananciaController {
         return new ResponseEntity<>(iGananciaService.listaGanancia(), HttpStatus.OK);
     }
 
-    @PostMapping("agregar/ganancia")
-    ResponseEntity<Ganancia> agregarGanancia(@RequestBody Ganancia ganancia){
-            return new ResponseEntity<>(iGananciaService.agregarGanancia(ganancia),HttpStatus.CREATED);
-    }
-
     @PutMapping("valor/ganancia/{valor}")
     ResponseEntity<Collection<Ganancia>> editarValorGanancia(@PathVariable Double valor){
             return new ResponseEntity<>(iGananciaService.editarValorGanancia(valor),HttpStatus.OK);

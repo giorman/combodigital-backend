@@ -9,7 +9,7 @@ import java.util.Optional;
 
 public interface IClienteService {
   List<Cliente> listaClientes();
-  Optional<Cliente> buscarCliente(Long id);
+  Cliente buscarCliente(Long id);
   Collection<Suscripcion> buscarSuscripcionCliente(Long id);
   Cliente agregarCliente(Cliente cliente);
   Cliente editarCliente(Cliente cliente);

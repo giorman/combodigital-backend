@@ -20,12 +20,7 @@ public class ClienteController {
 
     @GetMapping("consultar/cliente/{id}")
     private ResponseEntity<Cliente> buscar(@PathVariable Long id){
-        Optional<Cliente> clienteOptional = iClienteService.buscarCliente(id);
-
-        if (clienteOptional.isPresent()){
-            return new ResponseEntity<Cliente>(clienteOptional.get(),HttpStatus.OK);
-        }
-        return new ResponseEntity<>(null,HttpStatus.UNPROCESSABLE_ENTITY);
+            return new ResponseEntity<Cliente>(iClienteService.buscarCliente(id),HttpStatus.OK);
     }
 
     @GetMapping("lista/cliente")
@@ -46,20 +41,12 @@ public class ClienteController {
 
     @PutMapping("editar/cliente")
     private ResponseEntity<Cliente> editar(@RequestBody Cliente cliente){
-        Optional<Cliente> clienteEncontrado= iClienteService.buscarCliente(cliente.getId());
-        if (clienteEncontrado.isPresent()){
            return new ResponseEntity<Cliente>(iClienteService.editarCliente(cliente),HttpStatus.OK) ;
-        }
-        return  new ResponseEntity<>(null,HttpStatus.NOT_FOUND);
     }
 
     @DeleteMapping("eliminar/cliente/{id}")
     private ResponseEntity<Void> eliminar(@PathVariable Long id){
-        Optional<Cliente> clienteEncontrado= iClienteService.buscarCliente(id);
-        if (clienteEncontrado.isPresent()){
             iClienteService.eliminarCliente(id);
-            return new ResponseEntity<>(HttpStatus.OK) ;
-        }
-        return  new ResponseEntity<>(HttpStatus.UNPROCESSABLE_ENTITY);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT) ;
     }
 }

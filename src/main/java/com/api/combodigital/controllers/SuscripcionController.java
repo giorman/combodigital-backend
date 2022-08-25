@@ -24,11 +24,24 @@ public class SuscripcionController {
 
     @GetMapping("consultar/suscripcion/{id}")
     private ResponseEntity<Suscripcion> consultar(@PathVariable Long id){
-        Optional<Suscripcion> suscripcionEncontrada = iSuscripcionService.consultarSuscripcion(id);
-        if (suscripcionEncontrada.isPresent()){
-            return new ResponseEntity<>(suscripcionEncontrada.get(),HttpStatus.OK);
-        }
-        return new ResponseEntity<>(null,HttpStatus.UNPROCESSABLE_ENTITY);
+            return new ResponseEntity<>(iSuscripcionService.consultarSuscripcion(id),HttpStatus.OK);
+    }
+
+    @PostMapping("agregar/suscripcion")
+    private ResponseEntity<Suscripcion> agregar(@RequestBody Suscripcion suscripcion){
+        return new ResponseEntity<>(iSuscripcionService.agregarSuscripcion(suscripcion),HttpStatus.CREATED);
+
+    }
+
+    @PutMapping("editar/suscripcion")
+    private ResponseEntity<Suscripcion> editar(@RequestBody Suscripcion suscripcion){
+        return new ResponseEntity<>(iSuscripcionService.editarSuscripcion(suscripcion),HttpStatus.CREATED);
+    }
+
+    @DeleteMapping("eliminar/suscripcion/{id}")
+    private ResponseEntity<Void> eliminar(@PathVariable Long id){
+        iSuscripcionService.eliminarSuscripcion(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     @GetMapping("consultar/renovaciones")
@@ -41,34 +54,6 @@ public class SuscripcionController {
         return new ResponseEntity<>(iSuscripcionService.listaSuscripcionVencidas(),HttpStatus.OK);
     }
 
-    @GetMapping("consultar/suscripcion/{id}/cliente")
-    private ResponseEntity<Cliente> clienteSuscripcion(@PathVariable Long id){
-        Cliente cliente = iSuscripcionService.consultarSuscripcion(id).get().getCliente();
-        return new ResponseEntity<>(cliente,HttpStatus.OK);
-    }
 
-    @PostMapping("agregar/suscripcion")
-    private ResponseEntity<Suscripcion> agregar(@RequestBody Suscripcion suscripcion){
-        return new ResponseEntity<>(iSuscripcionService.agregarSuscripcion(suscripcion),HttpStatus.CREATED);
 
-    }
-
-    @PutMapping("editar/suscripcion")
-    private ResponseEntity<Suscripcion> editar(@RequestBody Suscripcion suscripcion){
-        Optional<Suscripcion> suscripcionEncontrada = iSuscripcionService.consultarSuscripcion(suscripcion.getId());
-        if (suscripcionEncontrada.isPresent()){
-            return new ResponseEntity<>(iSuscripcionService.editarSuscripcion(suscripcion),HttpStatus.CREATED);
-        }
-        return new ResponseEntity<>(null,HttpStatus.UNPROCESSABLE_ENTITY);
-    }
-
-    @DeleteMapping("eliminar/suscripcion/{id}")
-    private ResponseEntity<Void> eliminar(@PathVariable Long id){
-        Optional<Suscripcion> suscripcionEncontrada = iSuscripcionService.consultarSuscripcion(id);
-        if (suscripcionEncontrada.isPresent()){
-            iSuscripcionService.eliminarSuscripcion(id);
-            return new ResponseEntity<>(HttpStatus.OK);
-        }
-        return  new ResponseEntity<>(HttpStatus.NOT_FOUND);
-    }
 }

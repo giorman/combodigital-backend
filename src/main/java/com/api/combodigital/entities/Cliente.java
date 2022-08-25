@@ -13,32 +13,22 @@ import java.util.Set;
 
 @Entity
 @Table(name = "clientes")
-@AllArgsConstructor
-@NoArgsConstructor
+@Getter
+@Setter
 public class Cliente {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    @Getter
-    @Setter
     private Long id;
 
-    @Getter
-    @Setter
     private String nombre;
 
-    @Getter
-    @Setter
     private String apellido;
 
-    @Getter
-    @Setter
     private String telefono;
 
     @OneToMany(mappedBy = "cliente",cascade = CascadeType.ALL)
     @JsonBackReference
-    @Getter
-    @Setter
     private Set<Suscripcion> suscripciones = new HashSet<>();
 
     }

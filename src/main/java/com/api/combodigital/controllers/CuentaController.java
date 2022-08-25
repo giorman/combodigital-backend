@@ -25,44 +25,28 @@ public class CuentaController {
 
     @GetMapping("consultar/cuenta/{id}")
     ResponseEntity<Cuenta> consultar(@PathVariable Long id){
-        Optional<Cuenta> cuentaEncontrada = iCuentaService.consultarCuenta(id);
-        if (cuentaEncontrada.isPresent()){
-            return new ResponseEntity<>(cuentaEncontrada.get(),HttpStatus.OK);
-        }
-        return new ResponseEntity<>(null,HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(iCuentaService.consultarCuenta(id),HttpStatus.OK);
     }
 
     @PostMapping("agregar/cuenta")
-    ResponseEntity<?> agregar(@RequestBody Cuenta cuenta) {
+    ResponseEntity<Cuenta> agregar(@RequestBody Cuenta cuenta) {
         return new ResponseEntity<>(iCuentaService.agregarCuenta(cuenta),HttpStatus.CREATED);
     }
 
     @PutMapping("editar/cuenta")
     ResponseEntity<Cuenta> editar(@RequestBody Cuenta cuenta) {
-        Optional<Cuenta> cuentaEncontrada = iCuentaService.consultarCuenta(cuenta.getId());
-        if (cuentaEncontrada.isPresent()){
             return new ResponseEntity<>(iCuentaService.editarCuenta(cuenta),HttpStatus.OK);
-        }
-        return new ResponseEntity<>(null,HttpStatus.UNPROCESSABLE_ENTITY);
     }
 
     @DeleteMapping("eliminar/cuenta/{id}")
     ResponseEntity<Void> eliminar(@PathVariable Long id){
-        Optional<Cuenta> cuentaEncontrada = iCuentaService.consultarCuenta(id);
-        if (cuentaEncontrada.isPresent()){
             iCuentaService.eliminar(id);
-            return new ResponseEntity<>(HttpStatus.OK);
-        }
-        return new ResponseEntity<>(null,HttpStatus.UNPROCESSABLE_ENTITY);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     @GetMapping("consultar/cuenta/{id}/suscripcion")
     ResponseEntity<Collection<Suscripcion>> suscripcionCuenta(@PathVariable Long id)
     {
-        Optional<Cuenta> cuentaOptional= iCuentaService.consultarCuenta(id);
-        if(cuentaOptional.isPresent()){
-            return new ResponseEntity<>( cuentaOptional.get().getSuscripcion(),HttpStatus.OK);
-        }
-        return new ResponseEntity<>(null,HttpStatus.UNPROCESSABLE_ENTITY);
+        return new ResponseEntity<>(iCuentaService.consultarCuenta(id).getSuscripcion(),HttpStatus.OK);
     }
 }
