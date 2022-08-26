@@ -1,6 +1,6 @@
 package com.api.combodigital.controllers;
 
-import com.api.combodigital.entities.Cliente;
+
 import com.api.combodigital.entities.Suscripcion;
 import com.api.combodigital.services.ISuscripcionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +9,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("api/combodigital/")

@@ -5,7 +5,6 @@ import com.api.combodigital.entities.Suscripcion;
 
 import java.util.Collection;
 import java.util.List;
-import java.util.Optional;
 
 public interface IClienteService {
   List<Cliente> listaClientes();

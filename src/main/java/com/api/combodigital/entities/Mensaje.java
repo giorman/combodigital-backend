@@ -1,12 +1,11 @@
 package com.api.combodigital.entities;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.stereotype.Component;
 
-@Component
+@AllArgsConstructor
 public class Mensaje {
-
     @Getter
     @Setter
     String mensaje;

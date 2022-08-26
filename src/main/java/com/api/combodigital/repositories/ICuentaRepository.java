@@ -8,7 +8,6 @@ import java.util.Collection;
 
 @Repository
 public interface ICuentaRepository extends CrudRepository<Cuenta,Long> {
-
     Collection<Cuenta> findAll();
 
 }

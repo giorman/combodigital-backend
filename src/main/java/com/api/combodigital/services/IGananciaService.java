@@ -3,7 +3,6 @@ package com.api.combodigital.services;
 import com.api.combodigital.entities.Ganancia;
 
 import java.util.Collection;
-import java.util.Optional;
 
 public interface IGananciaService {
 
