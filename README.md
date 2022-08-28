@@ -22,7 +22,6 @@
 
 ## Configuracion en local 
 
-* Cambiar los datos del application.properties por los del application-local.properties
 * Ejecutar el archivo dbcombo.sql
 
 
