@@ -4,7 +4,7 @@
 
 ## Documentacion Api [Swagger](https://api-demo-combo.herokuapp.com/swagger-ui/index.html#)
 
-## App [demo](https://giorman.github.io/combodigital-frontend/)
+## Aplicacion [demo](https://giorman.github.io/combodigital-frontend/)
 
 -  Este [enlace](https://giorman.github.io/combodigital-frontend/) es un demo de la app, su front-end se encuentra alojado en github pages y su backend en heroku
 
