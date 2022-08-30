@@ -2,7 +2,7 @@
 
 ## Repositorio Frontend [Enlace](https://github.com/giorman/combodigital-frontend)
 
-# Docuentacion Api [Swagger](https://api-demo-combo.herokuapp.com/swagger-ui/index.html#)
+## Documentacion Api [Swagger](https://api-demo-combo.herokuapp.com/swagger-ui/index.html#)
 
 # [Demo](https://giorman.github.io/combodigital-frontend/)
 
@@ -24,6 +24,6 @@
 
 ## Configuracion en local 
 
-* Ejecutar el archivo dbcombo.sql
+* Ejecutar el archivo dbcombo.sql para crear la base de datos
 
 
