@@ -2,6 +2,8 @@
 
 ## Repositorio Frontend [Enlace](https://github.com/giorman/combodigital-frontend)
 
+# Docuentacion Api [Swagger](https://api-demo-combo.herokuapp.com/swagger-ui/index.html#)
+
 # [Demo](https://giorman.github.io/combodigital-frontend/)
 
 -  Este [enlace](https://giorman.github.io/combodigital-frontend/) es un demo de la app que se encuentra su front-end en gitpages y su backend en heroku
