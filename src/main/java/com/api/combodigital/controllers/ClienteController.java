@@ -3,6 +3,8 @@ package com.api.combodigital.controllers;
 import com.api.combodigital.entities.Cliente;
 import com.api.combodigital.entities.Suscripcion;
 import com.api.combodigital.services.IClienteService;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,11 +15,13 @@ import java.util.List;
 
 @RestController
 @RequestMapping("api/combodigital/")
+@Tag(name="Controlador Cliente")
 public class ClienteController {
     @Autowired
     IClienteService iClienteService;
 
     @GetMapping("consultar/cliente/{id}")
+
     private ResponseEntity<Cliente> buscar(@PathVariable Long id){
             return new ResponseEntity<Cliente>(iClienteService.buscarCliente(id),HttpStatus.OK);
     }
