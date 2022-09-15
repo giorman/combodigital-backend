@@ -58,7 +58,7 @@ public class SuscripcionController {
     }
 
     @GetMapping("consultar/vencidas")
-    @ApiOperation("consular suscripciones para vencidas")
+    @ApiOperation("consular suscripciones vencidas")
     private ResponseEntity<Collection<Suscripcion>> vencidas(){
         return new ResponseEntity<>(iSuscripcionService.listaSuscripcionVencidas(),HttpStatus.OK);
     }

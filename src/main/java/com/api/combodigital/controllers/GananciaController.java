@@ -26,7 +26,7 @@ public class GananciaController {
     }
 
     @PutMapping("valor/ganancia/{valor}")
-    @ApiOperation("consultar lista ganancias")
+    @ApiOperation("permite agregar mas ganancia al mes")
     ResponseEntity<Collection<Ganancia>> editarValorGanancia(@PathVariable Double valor){
             return new ResponseEntity<>(iGananciaService.editarValorGanancia(valor),HttpStatus.OK);
     }

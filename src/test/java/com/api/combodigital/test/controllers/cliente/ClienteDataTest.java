@@ -1,11 +1,8 @@
-package com.api.combodigital.test.controllers.controlador;
-
-
-
+package com.api.combodigital.test.controllers.cliente;
 
 public class ClienteDataTest {
 
-
+    private Long id;
 
     private String nombre;
 
@@ -16,13 +13,30 @@ public class ClienteDataTest {
 
     public ClienteDataTest clientePorDefecto() {
 
-        this.nombre = "Giorman2";
-        this.apellido = "Rodriguez";
+        this.nombre = "Fernando";
+        this.apellido = "Castillo";
         this.telefono = "3152485896";
 
         return this;
     }
 
+    public ClienteDataTest clienteEditado(Long id) {
+
+        this.id = id;
+        this.nombre = "Mauricio";
+        this.apellido = "Ramirez";
+        this.telefono = "1111111111";
+
+        return this;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getNombre() {
         return nombre;
