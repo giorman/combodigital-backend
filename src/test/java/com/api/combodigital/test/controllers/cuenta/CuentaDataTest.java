@@ -20,10 +20,6 @@ public class CuentaDataTest {
         return this;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public CuentaDataTest cuentaEditado(Long id) {
 
         this.id=id;
@@ -32,6 +28,10 @@ public class CuentaDataTest {
         this.dia = 30;
 
         return this;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public Long getId() {

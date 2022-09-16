@@ -31,6 +31,43 @@ public class SuscripcionDataTest {
 
     private String pin;
 
+    public SuscripcionDataTest suscripcionPorDefecto() {
+
+        this.correo = "giorman@gmail.com";
+        this.password = "11111111";
+        this.estado = true;
+        this.fechaInicio = LocalDate.now();
+        this.fechaFinal = fechaInicio.plusDays(30);
+        this.perfil = "perfil 1";
+        this.pin = "5487";
+        this.precio = 10000;
+        this.proveedor = "My Pantalla";
+        this.cuenta = new Cuenta();
+        cuenta.setId(1L);
+        this.cliente = new Cliente();
+        cliente.setId(1L);
+        return this;
+    }
+
+    public SuscripcionDataTest suscripcionEditar(Long id) {
+
+        this.id= id;
+        this.correo = "cambio@gmail.com";
+        this.password = "11111111";
+        this.estado = true;
+        this.fechaInicio = LocalDate.now();
+        this.fechaFinal = fechaInicio.plusDays(30);
+        this.perfil = "cambio 1";
+        this.pin = "5487";
+        this.precio = 10000;
+        this.proveedor = "My Pantalla";
+        this.cuenta = new Cuenta();
+        cuenta.setId(1L);
+        this.cliente = new Cliente();
+        cliente.setId(1L);
+        return this;
+    }
+
     public Long getId() {
         return id;
     }
@@ -126,43 +163,5 @@ public class SuscripcionDataTest {
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
     }
-
-    public SuscripcionDataTest suscripcionPorDefecto() {
-
-        this.correo = "giorman@gmail.com";
-        this.password = "11111111";
-        this.estado = true;
-        this.fechaInicio = LocalDate.now();
-        this.fechaFinal = fechaInicio.plusDays(30);
-        this.perfil = "perfil 1";
-        this.pin = "5487";
-        this.precio = 10000;
-        this.proveedor = "My Pantalla";
-        this.cuenta = new Cuenta();
-        cuenta.setId(1L);
-        this.cliente = new Cliente();
-        cliente.setId(1L);
-        return this;
-    }
-
-    public SuscripcionDataTest suscripcionEditar(Long id) {
-
-        this.id= id;
-        this.correo = "cambio@gmail.com";
-        this.password = "11111111";
-        this.estado = true;
-        this.fechaInicio = LocalDate.now();
-        this.fechaFinal = fechaInicio.plusDays(30);
-        this.perfil = "cambio 1";
-        this.pin = "5487";
-        this.precio = 10000;
-        this.proveedor = "My Pantalla";
-        this.cuenta = new Cuenta();
-        cuenta.setId(1L);
-        this.cliente = new Cliente();
-        cliente.setId(1L);
-        return this;
-    }
-
 
 }

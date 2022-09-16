@@ -2,7 +2,6 @@ package com.api.combodigital.test.controllers.cliente;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
@@ -17,7 +16,6 @@ import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-
 
 import static org.hamcrest.core.Is.is;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -37,6 +35,8 @@ public class ClienteControladorTest {
 
     @Autowired
     private MockMvc mockMvc;
+
+    private  ClienteDataTest clienteDataTest = new ClienteDataTest();;
 
     @Test
     public void consultarClienteExitoso() throws Exception {
@@ -67,7 +67,6 @@ public class ClienteControladorTest {
     @Test
     public void guardarClienteExitoso() throws Exception {
 
-        ClienteDataTest clienteDataTest = new ClienteDataTest();
         mockMvc.perform(MockMvcRequestBuilders.post("/api/combodigital/guardar/cliente")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(clienteDataTest.clientePorDefecto())))
@@ -81,7 +80,6 @@ public class ClienteControladorTest {
     @Test
     public void editarClienteExitoso() throws Exception {
 
-        ClienteDataTest clienteDataTest = new ClienteDataTest().clientePorDefecto();
         mockMvc.perform(MockMvcRequestBuilders.put("/api/combodigital/editar/cliente")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(clienteDataTest.clienteEditado(2L))))
@@ -95,7 +93,6 @@ public class ClienteControladorTest {
     @Test
     public void editarClienteError() throws Exception {
 
-        ClienteDataTest clienteDataTest = new ClienteDataTest().clientePorDefecto();
         mockMvc.perform(MockMvcRequestBuilders.put("/api/combodigital/editar/cliente")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(clienteDataTest.clienteEditado(10L))))

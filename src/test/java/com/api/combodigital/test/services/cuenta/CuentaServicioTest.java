@@ -1,9 +1,10 @@
-package com.api.combodigital.test.services.cliente;
+package com.api.combodigital.test.services.cuenta;
 
-import com.api.combodigital.entities.Cliente;
+import com.api.combodigital.entities.Cuenta;
+import com.api.combodigital.excepcion.ExcepcionCuentaNoEncontrado;
 import com.api.combodigital.excepcion.ExcepcionUsuarioNoEncontrado;
-import com.api.combodigital.repositories.IClienteRepository;
-import com.api.combodigital.services.impl.ClienteServiceImpl;
+import com.api.combodigital.repositories.ICuentaRepository;
+import com.api.combodigital.services.impl.CuentaServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -18,68 +19,69 @@ import static org.junit.jupiter.api.Assertions.*;
 
 
 @ExtendWith(MockitoExtension.class)
-public class ClienteServicioTest {
+public class CuentaServicioTest {
 
     @InjectMocks
-    private ClienteServiceImpl clienteService;
+    private CuentaServiceImpl cuentaService;
 
     @Mock
-    private IClienteRepository iClienteRepository;
+    private ICuentaRepository iCuentaRepository;
 
-    private Cliente cliente;
+    private Cuenta cuenta;
 
     @BeforeEach
     public void crear(){
-        cliente = new ClienteDataTest().clientePorDefecto().crear();
+        cuenta = new CuentaDataTest().cuentaPorDefecto().crear();
     }
 
     @Test
-    public void validarConsultarClienteExito() {
+    public void validarConsultarCuentaExito() {
         //Arrange
-        Mockito.when(iClienteRepository.findById(1L)).thenReturn(Optional.of(cliente));
+        Mockito.when(iCuentaRepository.findById(1L)).thenReturn(Optional.of(cuenta));
 
         //Act
-        Cliente clienteRecibido = clienteService.buscarCliente(1L);
+        Cuenta cuentaRecibido = cuentaService.consultarCuenta(1L);
 
         //Assert
-        assertEquals(1L, clienteRecibido.getId());
-        assertEquals("Fernando", clienteRecibido.getNombre());
-        assertEquals("Castillo", clienteRecibido.getApellido());
-        assertEquals("3152485896",clienteRecibido.getTelefono());
+        assertEquals(1L, cuentaRecibido.getId());
+        assertEquals("Disney", cuentaRecibido.getNombre());
+        assertEquals(7000, cuentaRecibido.getPrecio());
+        assertEquals(30,cuentaRecibido.getDia());
 
-        Mockito.verify(iClienteRepository).findById(1L);
+
+        Mockito.verify(iCuentaRepository).findById(1L);
     }
 
     @Test
-    public void validarConsultarClienteExcepcion() {
+    public void validarConsultarCuentaExcepcion() {
         //Arrange
-        Mockito.when(iClienteRepository.findById(1L)).thenThrow(new ExcepcionUsuarioNoEncontrado("usuario no encontrado"));
+        Mockito.when(iCuentaRepository.findById(1L)).thenThrow(new ExcepcionCuentaNoEncontrado("cuenta no encontrado"));
 
-        ExcepcionUsuarioNoEncontrado thrown = assertThrows(ExcepcionUsuarioNoEncontrado.class, () -> {
-            clienteService.buscarCliente(1L);
+        ExcepcionCuentaNoEncontrado thrown = assertThrows(ExcepcionCuentaNoEncontrado.class, () -> {
+            cuentaService.consultarCuenta(1L);
         });
 
         //Assert
-        assertTrue(thrown.getMessage().contains("usuario no encontrado"));
-        Mockito.verify(iClienteRepository).findById(1L);
+        assertTrue(thrown.getMessage().contains("cuenta no encontrado"));
+        Mockito.verify(iCuentaRepository).findById(1L);
     }
 
     @Test
-    public void validarGuardarClienteExito() {
+    public void validarGuardarCuentaExito() {
 
         //Arrange
-        Mockito.when(iClienteRepository.save(cliente)).thenReturn(cliente);
+        Mockito.when(iCuentaRepository.save(cuenta)).thenReturn(cuenta);
 
         //Act
-        Cliente clienteRecibido = clienteService.agregarCliente(cliente);
+        Cuenta cuentaRecibido = cuentaService.agregarCuenta(cuenta);
 
         //Assert
-        assertEquals(1L, clienteRecibido.getId());
-        assertEquals("Fernando", clienteRecibido.getNombre());
-        assertEquals("Castillo", clienteRecibido.getApellido());
-        assertEquals("3152485896",clienteRecibido.getTelefono());
+        assertEquals(1L, cuentaRecibido.getId());
+        assertEquals("Disney", cuentaRecibido.getNombre());
+        assertEquals(7000, cuentaRecibido.getPrecio());
+        assertEquals(30,cuentaRecibido.getDia());
 
-        Mockito.verify(iClienteRepository).save(cliente);
+        Mockito.verify(iCuentaRepository).save(cuenta);
     }
 
 

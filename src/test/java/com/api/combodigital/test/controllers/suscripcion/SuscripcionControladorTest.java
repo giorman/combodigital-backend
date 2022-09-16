@@ -35,6 +35,8 @@ public class SuscripcionControladorTest {
     @Autowired
     private MockMvc mockMvc;
 
+    private SuscripcionDataTest suscripcionDataTest = new SuscripcionDataTest().suscripcionPorDefecto();
+
     @Test
     public void consultarSuscripcionExitoso() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.get("/api/combodigital/consultar/suscripcion/1")
@@ -69,14 +71,13 @@ public class SuscripcionControladorTest {
                 .andExpect(jsonPath("$.[1]correo", is("prueba3@gmail.com")))
                 .andExpect(jsonPath("$.[1]password", is("22222222")))
                 .andExpect(jsonPath("$.[1]cliente.id", is(2)))
-                .andExpect(jsonPath("$.[1]cuenta.id", is(2)));
+                .andExpect(jsonPath("$.[1]cuenta.id", is(1)));
 
     }
 
     @Test
     public void guardarSuscripcionExitoso() throws Exception {
 
-        SuscripcionDataTest suscripcionDataTest = new SuscripcionDataTest();
         mockMvc.perform(MockMvcRequestBuilders.post("/api/combodigital/agregar/suscripcion")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(suscripcionDataTest.suscripcionPorDefecto())))
@@ -97,7 +98,6 @@ public class SuscripcionControladorTest {
     @Test
     public void editarSuscripcionExitoso() throws Exception {
 
-        SuscripcionDataTest suscripcionDataTest = new SuscripcionDataTest().suscripcionPorDefecto();
         mockMvc.perform(MockMvcRequestBuilders.put("/api/combodigital/editar/suscripcion")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(suscripcionDataTest.suscripcionEditar(2L))))
@@ -118,7 +118,6 @@ public class SuscripcionControladorTest {
     @Test
     public void editarSuscripcionError() throws Exception {
 
-        SuscripcionDataTest suscripcionDataTest = new SuscripcionDataTest().suscripcionPorDefecto();
         mockMvc.perform(MockMvcRequestBuilders.put("/api/combodigital/editar/suscripcion")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(suscripcionDataTest.suscripcionEditar(10L))))

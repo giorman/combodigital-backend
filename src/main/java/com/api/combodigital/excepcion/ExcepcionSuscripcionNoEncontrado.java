@@ -1,7 +1,7 @@
 package com.api.combodigital.excepcion;
 
-public class ExcepcionUsuarioNoEncontrado extends RuntimeException{
-    public ExcepcionUsuarioNoEncontrado(String message) {
+public class ExcepcionSuscripcionNoEncontrado extends RuntimeException{
+    public ExcepcionSuscripcionNoEncontrado(String message) {
         super(message);
     }
 }

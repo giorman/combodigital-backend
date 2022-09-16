@@ -1,4 +1,4 @@
-package com.api.combodigital.swagger;
+package com.api.combodigital.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,7 +15,7 @@ import java.util.Collections;
 
 @Configuration
 @EnableSwagger2
-public class SwaggerConfig implements WebMvcConfigurer {
+public class ConfigSwagger implements WebMvcConfigurer {
 
     @Bean
     public Docket api(){

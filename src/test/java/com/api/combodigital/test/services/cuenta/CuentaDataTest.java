@@ -1,78 +1,51 @@
-package com.api.combodigital.test.services.cliente;
+package com.api.combodigital.test.services.cuenta;
 
-import com.api.combodigital.entities.Cliente;
 
-public class ClienteDataTest {
+import com.api.combodigital.entities.Cuenta;
+
+public class CuentaDataTest {
 
     private Long id;
 
     private String nombre;
 
-    private String apellido;
+    private Double precio;
 
-    private String telefono;
+    private Integer dia;
 
 
-    public ClienteDataTest clientePorDefecto() {
+    public CuentaDataTest cuentaPorDefecto() {
 
-        this.id= 1L;
-        this.nombre = "Fernando";
-        this.apellido = "Castillo";
-        this.telefono = "3152485896";
-
+        this.id = 1L;
+        this.nombre = "Disney";
+        this.precio = 7000.0;
+        this.dia = 30;
         return this;
     }
 
-    public Cliente crear() {
-
-        return new Cliente(id,nombre,apellido,telefono,null);
+    public Cuenta crear() {
+        return new Cuenta(id,nombre,precio,dia,null);
     }
 
-    public ClienteDataTest ConId(Long id) {
+    public CuentaDataTest ConId(Long id) {
         this.id = id;
         return this;
     }
 
-    public ClienteDataTest ConNombre(String nombre) {
+    public CuentaDataTest ConNombre(String nombre) {
         this.nombre = nombre;
         return this;
     }
 
-    public ClienteDataTest conTelefono(String telefono) {
-        this.telefono = telefono;
+    public CuentaDataTest conPrecio(Double precio) {
+        this.precio = precio;
+        return this;
+    }
+
+    public CuentaDataTest conDia(String dia) {
+        this.precio = precio;
         return this;
     }
 
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public String getApellido() {
-        return apellido;
-    }
-
-    public void setApellido(String apellido) {
-        this.apellido = apellido;
-    }
-
-    public String getTelefono() {
-        return telefono;
-    }
-
-    public void setTelefono(String telefono) {
-        this.telefono = telefono;
-    }
 }

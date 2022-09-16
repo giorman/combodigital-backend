@@ -1,5 +1,6 @@
 package com.api.combodigital.services.impl;
 
+import com.api.combodigital.excepcion.ExcepcionUsuarioNoEncontrado;
 import com.api.combodigital.entities.Cliente;
 import com.api.combodigital.entities.Suscripcion;
 import com.api.combodigital.repositories.IClienteRepository;
@@ -8,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.EntityNotFoundException;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
@@ -29,7 +29,7 @@ public class ClienteServiceImpl implements IClienteService {
     public Cliente buscarCliente(Long id) {
         Optional<Cliente> clienteOptional = iClienteRepository.findById(id);
         if (!clienteOptional.isPresent()){
-            throw new EntityNotFoundException("El cliente no fue encontrado");
+            throw new ExcepcionUsuarioNoEncontrado("El cliente no fue encontrado");
         }
         return clienteOptional.get();
     }

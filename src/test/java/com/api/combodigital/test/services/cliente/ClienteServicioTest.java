@@ -1,122 +1,87 @@
-package com.api.combodigital.test.controllers.cliente;
+package com.api.combodigital.test.services.cliente;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-
-
+import com.api.combodigital.entities.Cliente;
+import com.api.combodigital.excepcion.ExcepcionUsuarioNoEncontrado;
+import com.api.combodigital.repositories.IClienteRepository;
+import com.api.combodigital.services.impl.ClienteServiceImpl;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.junit.jupiter.MockitoExtension;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import java.util.Optional;
 
-import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.http.MediaType;
-import org.springframework.test.annotation.DirtiesContext;
-import org.springframework.test.context.jdbc.Sql;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import static org.junit.jupiter.api.Assertions.*;
 
 
-import static org.hamcrest.core.Is.is;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+@ExtendWith(MockitoExtension.class)
+public class ClienteServicioTest {
 
+    @InjectMocks
+    private ClienteServiceImpl clienteService;
 
-@ExtendWith(SpringExtension.class)
-@SpringBootTest
-@DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
-@AutoConfigureMockMvc
-@AutoConfigureTestDatabase
-@Sql("/data-test.sql")
-public class ClienteControladorTest {
+    @Mock
+    private IClienteRepository iClienteRepository;
 
-    @Autowired
-    private ObjectMapper objectMapper;
+    private Cliente cliente;
 
-    @Autowired
-    private MockMvc mockMvc;
-
-    @Test
-    public void consultarClienteExitoso() throws Exception {
-
-        mockMvc.perform(MockMvcRequestBuilders.get("/api/combodigital/consultar/cliente/1")
-                        .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.id", is(1)))
-                .andExpect(jsonPath("$.nombre", is("Giorman")))
-                .andExpect(jsonPath("$.apellido", is("Rodriguez")))
-                .andExpect(jsonPath("$.telefono", is("3152485896")));
+    @BeforeEach
+    public void crear(){
+        cliente = new ClienteDataTest().clientePorDefecto().crear();
     }
 
     @Test
-    public void consultarListaClienteExitoso() throws Exception {
+    public void validarConsultarClienteExito() {
+        //Arrange
+        Mockito.when(iClienteRepository.findById(1L)).thenReturn(Optional.of(cliente));
 
-        mockMvc.perform(MockMvcRequestBuilders.get("/api/combodigital/lista/cliente")
-                        .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.[0]id", is(1)))
-                .andExpect(jsonPath("$.[0]nombre", is("Giorman")))
-                .andExpect(jsonPath("$.[0]apellido", is("Rodriguez")))
-                .andExpect(jsonPath("$.[1]id", is(2)))
-                .andExpect(jsonPath("$.[1]nombre", is("Antonio")))
-                .andExpect(jsonPath("$.[1]apellido", is("Ramirez")));
+        //Act
+        Cliente clienteRecibido = clienteService.buscarCliente(1L);
 
-    }
-    @Test
-    public void guardarClienteExitoso() throws Exception {
+        //Assert
+        assertEquals(1L, clienteRecibido.getId());
+        assertEquals("Fernando", clienteRecibido.getNombre());
+        assertEquals("Castillo", clienteRecibido.getApellido());
+        assertEquals("3152485896",clienteRecibido.getTelefono());
 
-        ClienteDataTest clienteDataTest = new ClienteDataTest();
-        mockMvc.perform(MockMvcRequestBuilders.post("/api/combodigital/guardar/cliente")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(clienteDataTest.clientePorDefecto())))
-                .andExpect(status().isCreated())
-                .andExpect(jsonPath("$.id", is(3)))
-                .andExpect(jsonPath("$.nombre", is("Fernando")))
-                .andExpect(jsonPath("$.apellido", is("Castillo")))
-                .andExpect(jsonPath("$.telefono", is("3152485896")));
+        Mockito.verify(iClienteRepository).findById(1L);
     }
 
     @Test
-    public void editarClienteExitoso() throws Exception {
+    public void validarConsultarClienteExcepcion() {
+        //Arrange
+        Mockito.when(iClienteRepository.findById(1L)).thenThrow(new ExcepcionUsuarioNoEncontrado("usuario no encontrado"));
 
-        ClienteDataTest clienteDataTest = new ClienteDataTest().clientePorDefecto();
-        mockMvc.perform(MockMvcRequestBuilders.put("/api/combodigital/editar/cliente")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(clienteDataTest.clienteEditado(2L))))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.id", is(2)))
-                .andExpect(jsonPath("$.nombre", is("Mauricio")))
-                .andExpect(jsonPath("$.apellido", is("Ramirez")))
-                .andExpect(jsonPath("$.telefono", is("1111111111")));
+        ExcepcionUsuarioNoEncontrado thrown = assertThrows(ExcepcionUsuarioNoEncontrado.class, () -> {
+            clienteService.buscarCliente(1L);
+        });
+
+        //Assert
+        assertTrue(thrown.getMessage().contains("usuario no encontrado"));
+        Mockito.verify(iClienteRepository).findById(1L);
     }
 
     @Test
-    public void editarClienteError() throws Exception {
+    public void validarGuardarClienteExito() {
 
-        ClienteDataTest clienteDataTest = new ClienteDataTest().clientePorDefecto();
-        mockMvc.perform(MockMvcRequestBuilders.put("/api/combodigital/editar/cliente")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(clienteDataTest.clienteEditado(10L))))
-                .andExpect(status().isNotFound())
-                .andExpect((jsonPath("$.mensaje", is("El cliente no fue encontrado"))));
+        //Arrange
+        Mockito.when(iClienteRepository.save(cliente)).thenReturn(cliente);
+
+        //Act
+        Cliente clienteRecibido = clienteService.agregarCliente(cliente);
+
+        //Assert
+        assertEquals(1L, clienteRecibido.getId());
+        assertEquals("Fernando", clienteRecibido.getNombre());
+        assertEquals("Castillo", clienteRecibido.getApellido());
+        assertEquals("3152485896",clienteRecibido.getTelefono());
+
+        Mockito.verify(iClienteRepository).save(cliente);
     }
 
-    @Test
-    public void eliminarClienteExitoso() throws Exception {
 
-        mockMvc.perform(MockMvcRequestBuilders.delete("/api/combodigital/eliminar/cliente/2")
-                        .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isNoContent());
-    }
 
-    @Test
-    public void eliminarClienteError() throws Exception {
-
-        mockMvc.perform(MockMvcRequestBuilders.delete("/api/combodigital/eliminar/cliente/10")
-                        .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isNotFound())
-                .andExpect((jsonPath("$.mensaje", is("El cliente no fue encontrado"))));
-    }
 }

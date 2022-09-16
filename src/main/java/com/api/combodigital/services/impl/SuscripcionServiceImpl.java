@@ -1,6 +1,7 @@
 package com.api.combodigital.services.impl;
 
 import com.api.combodigital.entities.Suscripcion;
+import com.api.combodigital.excepcion.ExcepcionSuscripcionNoEncontrado;
 import com.api.combodigital.repositories.ISuscripcionRepository;
 import com.api.combodigital.services.ISuscripcionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,7 +41,7 @@ public class SuscripcionServiceImpl implements ISuscripcionService {
     public Suscripcion consultarSuscripcion(Long id) {
         Optional<Suscripcion> suscripcionEncontrada = iSuscripcionRepository.findById(id);
         if (!suscripcionEncontrada.isPresent()){
-           throw new EntityNotFoundException("La suscripcion no fue encontrada");
+           throw new ExcepcionSuscripcionNoEncontrado("La suscripcion no fue encontrada");
         }
         return suscripcionEncontrada.get();
     }

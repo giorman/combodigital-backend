@@ -5,7 +5,7 @@ INSERT INTO `cuentas` (`dia`, `nombre`, `precio`) VALUES ('30', 'Netflix', '1000
 INSERT INTO `cuentas` (`dia`, `nombre`, `precio`) VALUES ('60', 'Amazon', '5000');
 
 INSERT INTO `suscripciones` (`correo`, `estado`, `fecha_final`, `fecha_inicio`, `password`, `perfil`, `pin`, `precio`, `proveedor`, `cliente_id`, `cuenta_id`) VALUES ('prueba2@gmail.com', '1', '2022-10-15', '2022-09-15', '22222222', 'perfil2', '8458', '6000', 'Mi Entretenimiento', '1', '1');
-INSERT INTO `suscripciones` (`correo`, `estado`, `fecha_final`, `fecha_inicio`, `password`, `perfil`, `pin`, `precio`, `proveedor`, `cliente_id`, `cuenta_id`) VALUES ('prueba3@gmail.com', '1', '2022-10-15', '2022-09-15', '22222222', 'perfil2', '8458', '6000', 'Mi Entretenimiento', '2', '2');
+INSERT INTO `suscripciones` (`correo`, `estado`, `fecha_final`, `fecha_inicio`, `password`, `perfil`, `pin`, `precio`, `proveedor`, `cliente_id`, `cuenta_id`) VALUES ('prueba3@gmail.com', '1', '2022-10-15', '2022-09-15', '22222222', 'perfil2', '8458', '6000', 'Mi Entretenimiento', '2', '1');
 
 INSERT INTO `ganancias` (`id`, `mes`, `valor`) VALUES
 	(1, 'Enero', 0),

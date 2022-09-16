@@ -1,7 +1,9 @@
 package com.api.combodigital.entities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -13,6 +15,8 @@ import java.util.Set;
 @Table(name = "clientes")
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class Cliente {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

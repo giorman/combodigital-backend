@@ -33,7 +33,6 @@ public class CuentaControladorTest {
     @Autowired
     private MockMvc mockMvc;
 
-
     @Test
     public void consultarListaGanaciaExito() throws Exception {
 
@@ -52,7 +51,6 @@ public class CuentaControladorTest {
     }
     @Test
     public void guardarCuentaExitoso() throws Exception {
-
 
         mockMvc.perform(MockMvcRequestBuilders.put("/api/combodigital/valor/ganancia/10000")
                         .contentType(MediaType.APPLICATION_JSON))

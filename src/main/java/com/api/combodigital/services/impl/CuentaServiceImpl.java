@@ -1,13 +1,13 @@
 package com.api.combodigital.services.impl;
 
 import com.api.combodigital.entities.Cuenta;
+import com.api.combodigital.excepcion.ExcepcionCuentaNoEncontrado;
 import com.api.combodigital.repositories.ICuentaRepository;
 import com.api.combodigital.services.ICuentaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.EntityNotFoundException;
 import java.util.Collection;
 import java.util.Optional;
 
@@ -26,7 +26,7 @@ public class CuentaServiceImpl implements ICuentaService {
     public Cuenta consultarCuenta(Long id) {
         Optional<Cuenta> cuentaEncontrada = iCuentaRepository.findById(id);
         if (!cuentaEncontrada.isPresent()){
-            throw new EntityNotFoundException("La cuenta no fue encontrada");
+            throw new ExcepcionCuentaNoEncontrado("La cuenta no fue encontrada");
         }
         return cuentaEncontrada.get();
     }

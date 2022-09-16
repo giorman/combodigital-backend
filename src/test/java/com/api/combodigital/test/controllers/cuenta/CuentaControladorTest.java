@@ -18,7 +18,6 @@ import static org.hamcrest.core.Is.is;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
@@ -32,6 +31,9 @@ public class CuentaControladorTest {
 
     @Autowired
     private MockMvc mockMvc;
+
+    private  CuentaDataTest cuentaDataTest = new CuentaDataTest();
+
 
     @Test
     public void consultarCuentaExitoso() throws Exception {
@@ -64,7 +66,6 @@ public class CuentaControladorTest {
     @Test
     public void guardarCuentaExitoso() throws Exception {
 
-        CuentaDataTest cuentaDataTest = new CuentaDataTest();
         mockMvc.perform(MockMvcRequestBuilders.post("/api/combodigital/agregar/cuenta")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(cuentaDataTest.cuentaPorDefecto())))
@@ -77,7 +78,6 @@ public class CuentaControladorTest {
     @Test
     public void editarCuentaExitoso() throws Exception {
 
-        CuentaDataTest cuentaDataTest = new CuentaDataTest().cuentaPorDefecto();
         mockMvc.perform(MockMvcRequestBuilders.put("/api/combodigital/editar/cuenta")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(cuentaDataTest.cuentaEditado(2L))))
@@ -91,7 +91,6 @@ public class CuentaControladorTest {
     @Test
     public void editarCuentaError() throws Exception {
 
-        CuentaDataTest cuentaDataTest = new CuentaDataTest().cuentaPorDefecto();
         mockMvc.perform(MockMvcRequestBuilders.put("/api/combodigital/editar/cuenta")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(cuentaDataTest.cuentaEditado(10L))))
