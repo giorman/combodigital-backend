@@ -1,6 +1,5 @@
 package com.api.combodigital.controllers;
 
-
 import com.api.combodigital.entities.Suscripcion;
 import com.api.combodigital.services.ISuscripcionService;
 import io.swagger.annotations.Api;
@@ -13,51 +12,51 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Collection;
 
 @RestController
-@RequestMapping("api/combodigital/")
+@RequestMapping("api/combodigital/v1/")
 @Api(tags = "Controlador Suscripcion")
 public class SuscripcionController {
     @Autowired
     private ISuscripcionService iSuscripcionService;
 
-    @GetMapping("lista/suscripcion")
+    @GetMapping("suscripcion")
     @ApiOperation("consultar lista suscripciones")
     private ResponseEntity<Collection<Suscripcion>> lista(){
         return new ResponseEntity<>( iSuscripcionService.listaSuscripcion(), HttpStatus.OK);
     }
 
-    @GetMapping("consultar/suscripcion/{id}")
+    @GetMapping("suscripcion/{id}")
     @ApiOperation("consultar una suscripcion")
     private ResponseEntity<Suscripcion> consultar(@PathVariable Long id){
             return new ResponseEntity<>(iSuscripcionService.consultarSuscripcion(id),HttpStatus.OK);
     }
 
-    @PostMapping("agregar/suscripcion")
+    @PostMapping("suscripcion")
     @ApiOperation("agregar una suscripcion")
     private ResponseEntity<Suscripcion> agregar(@RequestBody Suscripcion suscripcion){
         return new ResponseEntity<>(iSuscripcionService.agregarSuscripcion(suscripcion),HttpStatus.CREATED);
 
     }
 
-    @PutMapping("editar/suscripcion")
+    @PutMapping("suscripcion")
     @ApiOperation("editar una suscripcion")
     private ResponseEntity<Suscripcion> editar(@RequestBody Suscripcion suscripcion){
         return new ResponseEntity<>(iSuscripcionService.editarSuscripcion(suscripcion),HttpStatus.CREATED);
     }
 
-    @DeleteMapping("eliminar/suscripcion/{id}")
+    @DeleteMapping("suscripcion/{id}")
     @ApiOperation("eliminar una suscripcion")
     private ResponseEntity<Void> eliminar(@PathVariable Long id){
         iSuscripcionService.eliminarSuscripcion(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-    @GetMapping("consultar/renovaciones")
+    @GetMapping("suscripcion/renovaciones")
     @ApiOperation("consular suscripciones para renovar")
     private ResponseEntity<Collection<Suscripcion>> renovaciones(){
             return new ResponseEntity<>(iSuscripcionService.listaSuscripcionRenovaciones(),HttpStatus.OK);
     }
 
-    @GetMapping("consultar/vencidas")
+    @GetMapping("suscripcion/vencidas")
     @ApiOperation("consular suscripciones vencidas")
     private ResponseEntity<Collection<Suscripcion>> vencidas(){
         return new ResponseEntity<>(iSuscripcionService.listaSuscripcionVencidas(),HttpStatus.OK);

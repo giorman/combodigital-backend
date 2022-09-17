@@ -38,7 +38,7 @@ public class CuentaControladorTest {
     @Test
     public void consultarCuentaExitoso() throws Exception {
 
-        mockMvc.perform(MockMvcRequestBuilders.get("/api/combodigital/consultar/cuenta/1")
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/combodigital/v1/cuenta/1")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id", is(1)))
@@ -50,7 +50,7 @@ public class CuentaControladorTest {
     @Test
     public void consultarListaCuentaExitoso() throws Exception {
 
-        mockMvc.perform(MockMvcRequestBuilders.get("/api/combodigital/lista/cuenta")
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/combodigital/v1/cuenta")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.[0]id", is(1)))
@@ -66,7 +66,7 @@ public class CuentaControladorTest {
     @Test
     public void guardarCuentaExitoso() throws Exception {
 
-        mockMvc.perform(MockMvcRequestBuilders.post("/api/combodigital/agregar/cuenta")
+        mockMvc.perform(MockMvcRequestBuilders.post("/api/combodigital/v1/cuenta")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(cuentaDataTest.cuentaPorDefecto())))
                 .andExpect(status().isCreated())
@@ -78,7 +78,7 @@ public class CuentaControladorTest {
     @Test
     public void editarCuentaExitoso() throws Exception {
 
-        mockMvc.perform(MockMvcRequestBuilders.put("/api/combodigital/editar/cuenta")
+        mockMvc.perform(MockMvcRequestBuilders.put("/api/combodigital/v1/cuenta")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(cuentaDataTest.cuentaEditado(2L))))
                 .andExpect(status().isOk())
@@ -91,7 +91,7 @@ public class CuentaControladorTest {
     @Test
     public void editarCuentaError() throws Exception {
 
-        mockMvc.perform(MockMvcRequestBuilders.put("/api/combodigital/editar/cuenta")
+        mockMvc.perform(MockMvcRequestBuilders.put("/api/combodigital/v1/cuenta")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(cuentaDataTest.cuentaEditado(10L))))
                 .andExpect(status().isNotFound());
@@ -100,7 +100,7 @@ public class CuentaControladorTest {
     @Test
     public void eliminarCuentaExitoso() throws Exception {
 
-        mockMvc.perform(MockMvcRequestBuilders.delete("/api/combodigital/eliminar/cuenta/2")
+        mockMvc.perform(MockMvcRequestBuilders.delete("/api/combodigital/v1/cuenta/2")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNoContent());
     }
@@ -108,7 +108,7 @@ public class CuentaControladorTest {
     @Test
     public void eliminarCuentaError() throws Exception {
 
-        mockMvc.perform(MockMvcRequestBuilders.delete("/api/combodigital/eliminar/cuenta/10")
+        mockMvc.perform(MockMvcRequestBuilders.delete("/api/combodigital/v1/cuenta/10")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNotFound())
                 .andExpect((jsonPath("$.mensaje", is("La cuenta no fue encontrada"))));

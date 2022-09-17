@@ -12,20 +12,20 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Collection;
 
 @RestController
-@RequestMapping("api/combodigital/")
+@RequestMapping("api/combodigital/v1/")
 @Api(tags = "Controlador Ganancia")
 public class GananciaController {
 
     @Autowired
     private IGananciaService iGananciaService;
 
-    @GetMapping("lista/ganancia")
+    @GetMapping("ganancia")
     @ApiOperation("consultar lista ganancias")
     ResponseEntity<Collection<Ganancia>> listaGanancia(){
         return new ResponseEntity<>(iGananciaService.listaGanancia(), HttpStatus.OK);
     }
 
-    @PutMapping("valor/ganancia/{valor}")
+    @PutMapping("ganancia/valor/{valor}")
     @ApiOperation("permite agregar mas ganancia al mes")
     ResponseEntity<Collection<Ganancia>> editarValorGanancia(@PathVariable Double valor){
             return new ResponseEntity<>(iGananciaService.editarValorGanancia(valor),HttpStatus.OK);

@@ -13,45 +13,45 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Collection;
 
 @RestController
-@RequestMapping("api/combodigital/")
+@RequestMapping("api/combodigital/v1/")
 @Api(tags = "Controlador Cuenta")
 public class CuentaController {
 
     @Autowired
     ICuentaService iCuentaService;
 
-    @GetMapping("lista/cuenta")
+    @GetMapping("cuenta")
     @ApiOperation("consultar lista de cuentas")
     ResponseEntity<Collection<Cuenta>> lista(){
         return new ResponseEntity<>(iCuentaService.listaCuenta(), HttpStatus.OK);
     }
 
-    @GetMapping("consultar/cuenta/{id}")
+    @GetMapping("cuenta/{id}")
     @ApiOperation("consultar una cuenta")
     ResponseEntity<Cuenta> consultar(@PathVariable Long id){
             return new ResponseEntity<>(iCuentaService.consultarCuenta(id),HttpStatus.OK);
     }
 
-    @GetMapping("consultar/cuenta/{id}/suscripcion")
+    @GetMapping("cuenta/{id}/suscripcion")
     @ApiOperation("consultar suscripciones de una cuenta")
     ResponseEntity<Collection<Suscripcion>> suscripcionCuenta(@PathVariable Long id)
     {
         return new ResponseEntity<>(iCuentaService.consultarCuenta(id).getSuscripcion(),HttpStatus.OK);
     }
 
-    @PostMapping("agregar/cuenta")
+    @PostMapping("cuenta")
     @ApiOperation("agregar una cuenta")
     ResponseEntity<Cuenta> agregar(@RequestBody Cuenta cuenta) {
         return new ResponseEntity<>(iCuentaService.agregarCuenta(cuenta),HttpStatus.CREATED);
     }
 
-    @PutMapping("editar/cuenta")
+    @PutMapping("cuenta")
     @ApiOperation("editar una cuenta")
     ResponseEntity<Cuenta> editar(@RequestBody Cuenta cuenta) {
             return new ResponseEntity<>(iCuentaService.editarCuenta(cuenta),HttpStatus.OK);
     }
 
-    @DeleteMapping("eliminar/cuenta/{id}")
+    @DeleteMapping("cuenta/{id}")
     @ApiOperation("eliminar una cuenta")
     ResponseEntity<Void> eliminar(@PathVariable Long id){
             iCuentaService.eliminar(id);

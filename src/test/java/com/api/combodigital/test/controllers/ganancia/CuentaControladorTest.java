@@ -36,7 +36,7 @@ public class CuentaControladorTest {
     @Test
     public void consultarListaGanaciaExito() throws Exception {
 
-        mockMvc.perform(MockMvcRequestBuilders.get("/api/combodigital/lista/ganancia")
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/combodigital/v1/ganancia")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.[0]id", is(1)))
@@ -52,7 +52,7 @@ public class CuentaControladorTest {
     @Test
     public void guardarCuentaExitoso() throws Exception {
 
-        mockMvc.perform(MockMvcRequestBuilders.put("/api/combodigital/valor/ganancia/10000")
+        mockMvc.perform(MockMvcRequestBuilders.put("/api/combodigital/v1/ganancia/valor/10000")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.[0]id", is(1)))

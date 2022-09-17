@@ -39,7 +39,7 @@ public class SuscripcionControladorTest {
 
     @Test
     public void consultarSuscripcionExitoso() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.get("/api/combodigital/consultar/suscripcion/1")
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/combodigital/v1/suscripcion/1")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id", is(1)))
@@ -59,7 +59,7 @@ public class SuscripcionControladorTest {
     @Test
     public void consultarListaSuscripcionesExitoso() throws Exception {
 
-        mockMvc.perform(MockMvcRequestBuilders.get("/api/combodigital/lista/suscripcion")
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/combodigital/v1/suscripcion")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.[0]id", is(1)))
@@ -78,7 +78,7 @@ public class SuscripcionControladorTest {
     @Test
     public void guardarSuscripcionExitoso() throws Exception {
 
-        mockMvc.perform(MockMvcRequestBuilders.post("/api/combodigital/agregar/suscripcion")
+        mockMvc.perform(MockMvcRequestBuilders.post("/api/combodigital/v1/suscripcion")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(suscripcionDataTest.suscripcionPorDefecto())))
                 .andExpect(status().isCreated())
@@ -98,7 +98,7 @@ public class SuscripcionControladorTest {
     @Test
     public void editarSuscripcionExitoso() throws Exception {
 
-        mockMvc.perform(MockMvcRequestBuilders.put("/api/combodigital/editar/suscripcion")
+        mockMvc.perform(MockMvcRequestBuilders.put("/api/combodigital/v1/suscripcion")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(suscripcionDataTest.suscripcionEditar(2L))))
                 .andExpect(status().isCreated())
@@ -118,7 +118,7 @@ public class SuscripcionControladorTest {
     @Test
     public void editarSuscripcionError() throws Exception {
 
-        mockMvc.perform(MockMvcRequestBuilders.put("/api/combodigital/editar/suscripcion")
+        mockMvc.perform(MockMvcRequestBuilders.put("/api/combodigital/v1/suscripcion")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(suscripcionDataTest.suscripcionEditar(10L))))
                 .andExpect(status().isNotFound())
@@ -128,7 +128,7 @@ public class SuscripcionControladorTest {
     @Test
     public void eliminarClienteExitoso() throws Exception {
 
-        mockMvc.perform(MockMvcRequestBuilders.delete("/api/combodigital/eliminar/suscripcion/2")
+        mockMvc.perform(MockMvcRequestBuilders.delete("/api/combodigital/v1/suscripcion/2")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNoContent());
     }
@@ -136,7 +136,7 @@ public class SuscripcionControladorTest {
     @Test
     public void eliminarClienteError() throws Exception {
 
-        mockMvc.perform(MockMvcRequestBuilders.delete("/api/combodigital/eliminar/suscripcion/10")
+        mockMvc.perform(MockMvcRequestBuilders.delete("/api/combodigital/v1/suscripcion/10")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNotFound())
                 .andExpect((jsonPath("$.mensaje", is("La suscripcion no fue encontrada"))));

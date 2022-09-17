@@ -41,7 +41,7 @@ public class ClienteControladorTest {
     @Test
     public void consultarClienteExitoso() throws Exception {
 
-        mockMvc.perform(MockMvcRequestBuilders.get("/api/combodigital/consultar/cliente/1")
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/combodigital/v1/cliente/1")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id", is(1)))
@@ -53,7 +53,7 @@ public class ClienteControladorTest {
     @Test
     public void consultarListaClienteExitoso() throws Exception {
 
-        mockMvc.perform(MockMvcRequestBuilders.get("/api/combodigital/lista/cliente")
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/combodigital/v1/cliente")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.[0]id", is(1)))
@@ -67,7 +67,7 @@ public class ClienteControladorTest {
     @Test
     public void guardarClienteExitoso() throws Exception {
 
-        mockMvc.perform(MockMvcRequestBuilders.post("/api/combodigital/guardar/cliente")
+        mockMvc.perform(MockMvcRequestBuilders.post("/api/combodigital/v1/cliente")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(clienteDataTest.clientePorDefecto())))
                 .andExpect(status().isCreated())
@@ -80,7 +80,7 @@ public class ClienteControladorTest {
     @Test
     public void editarClienteExitoso() throws Exception {
 
-        mockMvc.perform(MockMvcRequestBuilders.put("/api/combodigital/editar/cliente")
+        mockMvc.perform(MockMvcRequestBuilders.put("/api/combodigital/v1/cliente")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(clienteDataTest.clienteEditado(2L))))
                 .andExpect(status().isOk())
@@ -93,7 +93,7 @@ public class ClienteControladorTest {
     @Test
     public void editarClienteError() throws Exception {
 
-        mockMvc.perform(MockMvcRequestBuilders.put("/api/combodigital/editar/cliente")
+        mockMvc.perform(MockMvcRequestBuilders.put("/api/combodigital/v1/cliente")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(clienteDataTest.clienteEditado(10L))))
                 .andExpect(status().isNotFound())
@@ -103,7 +103,7 @@ public class ClienteControladorTest {
     @Test
     public void eliminarClienteExitoso() throws Exception {
 
-        mockMvc.perform(MockMvcRequestBuilders.delete("/api/combodigital/eliminar/cliente/2")
+        mockMvc.perform(MockMvcRequestBuilders.delete("/api/combodigital/v1/cliente/2")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNoContent());
     }
@@ -111,7 +111,7 @@ public class ClienteControladorTest {
     @Test
     public void eliminarClienteError() throws Exception {
 
-        mockMvc.perform(MockMvcRequestBuilders.delete("/api/combodigital/eliminar/cliente/10")
+        mockMvc.perform(MockMvcRequestBuilders.delete("/api/combodigital/v1/cliente/10")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNotFound())
                 .andExpect((jsonPath("$.mensaje", is("El cliente no fue encontrado"))));

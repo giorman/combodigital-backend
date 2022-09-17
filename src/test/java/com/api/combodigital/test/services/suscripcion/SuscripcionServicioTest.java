@@ -50,7 +50,6 @@ public class SuscripcionServicioTest {
         assertEquals(10000, suscripcionRecibido.getPrecio());
         assertEquals("My Pantalla", suscripcionRecibido.getProveedor());
 
-
         Mockito.verify(iSuscripcionRepository).findById(1L);
     }
 
