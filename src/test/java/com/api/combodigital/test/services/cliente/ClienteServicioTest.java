@@ -30,7 +30,7 @@ public class ClienteServicioTest {
 
     @BeforeEach
     public void crear(){
-        cliente = new ClienteDataTest().clientePorDefecto().crear();
+        cliente = new ClienteTestDataBuilder().clientePorDefecto().crear();
     }
 
     @Test

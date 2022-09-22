@@ -36,7 +36,7 @@ public class ClienteControladorTest {
     @Autowired
     private MockMvc mockMvc;
 
-    private  ClienteDataTest clienteDataTest = new ClienteDataTest();;
+    private  ClienteTestDataBuilder clienteTestDataBuilder = new ClienteTestDataBuilder();;
 
     @Test
     public void consultarClienteExitoso() throws Exception {
@@ -69,7 +69,7 @@ public class ClienteControladorTest {
 
         mockMvc.perform(MockMvcRequestBuilders.post("/api/combodigital/v1/cliente")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(clienteDataTest.clientePorDefecto())))
+                        .content(objectMapper.writeValueAsString(clienteTestDataBuilder.clientePorDefecto())))
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.id", is(3)))
                 .andExpect(jsonPath("$.nombre", is("Fernando")))
@@ -82,7 +82,7 @@ public class ClienteControladorTest {
 
         mockMvc.perform(MockMvcRequestBuilders.put("/api/combodigital/v1/cliente")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(clienteDataTest.clienteEditado(2L))))
+                        .content(objectMapper.writeValueAsString(clienteTestDataBuilder.clienteEditado(2L))))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id", is(2)))
                 .andExpect(jsonPath("$.nombre", is("Mauricio")))
@@ -95,7 +95,7 @@ public class ClienteControladorTest {
 
         mockMvc.perform(MockMvcRequestBuilders.put("/api/combodigital/v1/cliente")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(clienteDataTest.clienteEditado(10L))))
+                        .content(objectMapper.writeValueAsString(clienteTestDataBuilder.clienteEditado(10L))))
                 .andExpect(status().isNotFound())
                 .andExpect((jsonPath("$.mensaje", is("El cliente no fue encontrado"))));
     }

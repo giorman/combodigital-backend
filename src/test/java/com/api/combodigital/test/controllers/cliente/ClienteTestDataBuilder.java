@@ -1,6 +1,6 @@
 package com.api.combodigital.test.controllers.cliente;
 
-public class ClienteDataTest {
+public class ClienteTestDataBuilder {
 
     private Long id;
 
@@ -11,7 +11,7 @@ public class ClienteDataTest {
     private String telefono;
 
 
-    public ClienteDataTest clientePorDefecto() {
+    public ClienteTestDataBuilder clientePorDefecto() {
 
         this.nombre = "Fernando";
         this.apellido = "Castillo";
@@ -20,7 +20,7 @@ public class ClienteDataTest {
         return this;
     }
 
-    public ClienteDataTest clienteEditado(Long id) {
+    public ClienteTestDataBuilder clienteEditado(Long id) {
 
         this.id = id;
         this.nombre = "Mauricio";

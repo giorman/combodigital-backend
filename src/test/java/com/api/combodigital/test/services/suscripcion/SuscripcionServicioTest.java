@@ -30,7 +30,7 @@ public class SuscripcionServicioTest {
 
     @BeforeEach
     public void crear(){
-        suscripcion = new SuscripcionDataTest().suscripcionPorDefecto().crear();
+        suscripcion = new SuscripcionTestDataBuilder().suscripcionPorDefecto().crear();
     }
 
     @Test

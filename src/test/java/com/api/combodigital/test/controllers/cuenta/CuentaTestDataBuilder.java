@@ -1,6 +1,6 @@
 package com.api.combodigital.test.controllers.cuenta;
 
-public class CuentaDataTest {
+public class CuentaTestDataBuilder {
 
     private Long id;
 
@@ -11,7 +11,7 @@ public class CuentaDataTest {
     private Integer dia;
 
 
-    public CuentaDataTest cuentaPorDefecto() {
+    public CuentaTestDataBuilder cuentaPorDefecto() {
 
         this.nombre = "Disney";
         this.precio = 7000;
@@ -20,7 +20,7 @@ public class CuentaDataTest {
         return this;
     }
 
-    public CuentaDataTest cuentaEditado(Long id) {
+    public CuentaTestDataBuilder cuentaEditado(Long id) {
 
         this.id=id;
         this.nombre = "Star";

@@ -35,7 +35,7 @@ public class SuscripcionControladorTest {
     @Autowired
     private MockMvc mockMvc;
 
-    private SuscripcionDataTest suscripcionDataTest = new SuscripcionDataTest().suscripcionPorDefecto();
+    private SuscripcionTestDataBuilder suscripcionTestDataBuilder = new SuscripcionTestDataBuilder().suscripcionPorDefecto();
 
     @Test
     public void consultarSuscripcionExitoso() throws Exception {
@@ -80,7 +80,7 @@ public class SuscripcionControladorTest {
 
         mockMvc.perform(MockMvcRequestBuilders.post("/api/combodigital/v1/suscripcion")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(suscripcionDataTest.suscripcionPorDefecto())))
+                        .content(objectMapper.writeValueAsString(suscripcionTestDataBuilder.suscripcionPorDefecto())))
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.id", is(3)))
                 .andExpect(jsonPath("$.correo", is("giorman@gmail.com")))
@@ -100,7 +100,7 @@ public class SuscripcionControladorTest {
 
         mockMvc.perform(MockMvcRequestBuilders.put("/api/combodigital/v1/suscripcion")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(suscripcionDataTest.suscripcionEditar(2L))))
+                        .content(objectMapper.writeValueAsString(suscripcionTestDataBuilder.suscripcionEditar(2L))))
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.id", is(2)))
                 .andExpect(jsonPath("$.correo", is("cambio@gmail.com")))
@@ -120,7 +120,7 @@ public class SuscripcionControladorTest {
 
         mockMvc.perform(MockMvcRequestBuilders.put("/api/combodigital/v1/suscripcion")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(suscripcionDataTest.suscripcionEditar(10L))))
+                        .content(objectMapper.writeValueAsString(suscripcionTestDataBuilder.suscripcionEditar(10L))))
                 .andExpect(status().isNotFound())
                 .andExpect(jsonPath("$.mensaje", is("La suscripcion no fue encontrada")));
     }

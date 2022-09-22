@@ -3,7 +3,7 @@ package com.api.combodigital.test.services.cuenta;
 
 import com.api.combodigital.entities.Cuenta;
 
-public class CuentaDataTest {
+public class CuentaTestDataBuilder {
 
     private Long id;
 
@@ -14,7 +14,7 @@ public class CuentaDataTest {
     private Integer dia;
 
 
-    public CuentaDataTest cuentaPorDefecto() {
+    public CuentaTestDataBuilder cuentaPorDefecto() {
 
         this.id = 1L;
         this.nombre = "Disney";
@@ -27,22 +27,22 @@ public class CuentaDataTest {
         return new Cuenta(id,nombre,precio,dia,null);
     }
 
-    public CuentaDataTest ConId(Long id) {
+    public CuentaTestDataBuilder ConId(Long id) {
         this.id = id;
         return this;
     }
 
-    public CuentaDataTest ConNombre(String nombre) {
+    public CuentaTestDataBuilder ConNombre(String nombre) {
         this.nombre = nombre;
         return this;
     }
 
-    public CuentaDataTest conPrecio(Double precio) {
+    public CuentaTestDataBuilder conPrecio(Double precio) {
         this.precio = precio;
         return this;
     }
 
-    public CuentaDataTest conDia(String dia) {
+    public CuentaTestDataBuilder conDia(String dia) {
         this.precio = precio;
         return this;
     }

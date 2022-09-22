@@ -4,7 +4,7 @@ import com.api.combodigital.entities.Suscripcion;
 
 import java.time.LocalDate;
 
-public class SuscripcionDataTest {
+public class SuscripcionTestDataBuilder {
 
     private Long id;
 
@@ -26,7 +26,7 @@ public class SuscripcionDataTest {
 
     private String proveedor;
 
-    public SuscripcionDataTest suscripcionPorDefecto() {
+    public SuscripcionTestDataBuilder suscripcionPorDefecto() {
 
         this.id=1L;
         this.correo = "giorman@gmail.com";
@@ -45,22 +45,22 @@ public class SuscripcionDataTest {
         return new Suscripcion(id, correo, password, estado, fechaInicio, fechaFinal,perfil, pin,precio , proveedor,null , null );
     }
 
-    public SuscripcionDataTest ConId(Long id) {
+    public SuscripcionTestDataBuilder ConId(Long id) {
         this.id = id;
         return this;
     }
 
-    public SuscripcionDataTest ConCorreo(String correo) {
+    public SuscripcionTestDataBuilder ConCorreo(String correo) {
         this.correo= correo;
         return this;
     }
 
-    public SuscripcionDataTest conPassword(String password) {
+    public SuscripcionTestDataBuilder conPassword(String password) {
         this.password = password;
         return this;
     }
 
-    public SuscripcionDataTest conPrecio(Integer precio) {
+    public SuscripcionTestDataBuilder conPrecio(Integer precio) {
         this.precio = precio;
         return this;
     }

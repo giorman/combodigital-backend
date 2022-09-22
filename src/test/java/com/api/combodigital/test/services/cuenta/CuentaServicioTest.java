@@ -2,7 +2,6 @@ package com.api.combodigital.test.services.cuenta;
 
 import com.api.combodigital.entities.Cuenta;
 import com.api.combodigital.excepcion.ExcepcionCuentaNoEncontrado;
-import com.api.combodigital.excepcion.ExcepcionUsuarioNoEncontrado;
 import com.api.combodigital.repositories.ICuentaRepository;
 import com.api.combodigital.services.impl.CuentaServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
@@ -31,7 +30,7 @@ public class CuentaServicioTest {
 
     @BeforeEach
     public void crear(){
-        cuenta = new CuentaDataTest().cuentaPorDefecto().crear();
+        cuenta = new CuentaTestDataBuilder().cuentaPorDefecto().crear();
     }
 
     @Test

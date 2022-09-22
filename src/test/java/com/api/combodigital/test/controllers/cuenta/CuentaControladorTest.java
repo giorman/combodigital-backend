@@ -32,7 +32,7 @@ public class CuentaControladorTest {
     @Autowired
     private MockMvc mockMvc;
 
-    private  CuentaDataTest cuentaDataTest = new CuentaDataTest();
+    private CuentaTestDataBuilder cuentaDataTest = new CuentaTestDataBuilder();
 
 
     @Test

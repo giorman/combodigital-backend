@@ -5,7 +5,7 @@ import com.api.combodigital.entities.Cuenta;
 
 import java.time.LocalDate;
 
-public class SuscripcionDataTest {
+public class SuscripcionTestDataBuilder {
 
     private Long id;
 
@@ -31,7 +31,7 @@ public class SuscripcionDataTest {
 
     private String pin;
 
-    public SuscripcionDataTest suscripcionPorDefecto() {
+    public SuscripcionTestDataBuilder suscripcionPorDefecto() {
 
         this.correo = "giorman@gmail.com";
         this.password = "11111111";
@@ -49,7 +49,7 @@ public class SuscripcionDataTest {
         return this;
     }
 
-    public SuscripcionDataTest suscripcionEditar(Long id) {
+    public SuscripcionTestDataBuilder suscripcionEditar(Long id) {
 
         this.id= id;
         this.correo = "cambio@gmail.com";
