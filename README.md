@@ -21,7 +21,7 @@
 
 ## Ramas
 
-* La Rama Master funciona en local
+* La Rama Master funciona localmente
 
 ## Configuración en local 
 
