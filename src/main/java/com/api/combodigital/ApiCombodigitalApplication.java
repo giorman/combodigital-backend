@@ -31,5 +31,6 @@ public class ApiCombodigitalApplication {
 		urlBasedCorsConfigurationSource.registerCorsConfiguration("/**", corsConfiguration);
 		return new CorsFilter(urlBasedCorsConfigurationSource);
 	}
+	
 
 }
